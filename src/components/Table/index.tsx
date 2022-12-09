@@ -1,18 +1,9 @@
 import React from "react";
-import { TReportItem } from "../../types";
-
-type TTable = {
-	data: Array<TReportItem>;
-	headerKeys: Array<{
-		name: string;
-		sortKey?: string;
-		onClick?: () => void;
-	}>;
-};
+import { TTable } from "../../types";
+import TableRow from "../TableRow";
 
 const Table = (props: TTable) => {
 	const { data, headerKeys } = props;
-	console.log(data);
 	return (
 		<table>
 			<thead>
@@ -29,12 +20,7 @@ const Table = (props: TTable) => {
 
 			<tbody>
 				{data?.map((item) => (
-					<tr>
-						<td>{item.companyName}</td>
-						<td>{item.lastReportingDate}</td>
-						<td>{item.lastReportingPeriod}</td>
-						<td>{item.nextReportingDate}</td>
-					</tr>
+					<TableRow data={item} />
 				))}
 			</tbody>
 		</table>
