@@ -28,19 +28,6 @@ const App = () => {
 
 	const dataFetchedRef = React.useRef(false);
 
-	// const formattedData = () =>
-	// 	mockData.map((item: TReportItem) => {
-	// 		item.nextReportingDate = formatFuzzyTimes(item.nextReportingDate);
-
-	// 		const inferredCheck: Date = item.nextReportingInferred
-	// 			? setToLastDayOfMoth(item.nextReportingDate)
-	// 			: new Date(item.nextReportingDate);
-
-	// 		item.nextReportingDate = localizeTime(inferredCheck);
-
-	// 		return item;
-	// 	});
-
 	const filteredData = (): Array<TReportItem> | [] => {
 		if (data.length > 0)
 			if (search)
@@ -74,11 +61,9 @@ const App = () => {
 	}, []);
 
 	React.useEffect(() => {
-		if (sortKey && sort) {
-			setData(sortedData);
-		} else {
-			setData(filteredData());
-		}
+		setData(sortedData);
+		setSortKey(null);
+		setData(filteredData());
 	}, [search, sortKey, sort]);
 
 	return (
