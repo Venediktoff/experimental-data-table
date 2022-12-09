@@ -16,7 +16,7 @@ export type TTableRow = {
 };
 
 export type TTable = {
-	data: Array<TReportItem>;
+	data: Array<TReportItem> | [];
 	headerKeys: Array<{
 		name: string;
 		sortKey?: string;
