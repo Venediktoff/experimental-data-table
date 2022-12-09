@@ -24,3 +24,9 @@ export type TTable = {
 	}>;
 	children?: React.ReactNode;
 };
+
+export enum SortOrder {
+	ASC = "ASC",
+	DESC = "DESC",
+	NONE = "NONE",
+}

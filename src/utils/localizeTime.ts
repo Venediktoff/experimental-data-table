@@ -1,4 +1,5 @@
 export default (rawDate: Date) => {
+
     return new Date(rawDate).toLocaleDateString(
         "en-GB",
         {

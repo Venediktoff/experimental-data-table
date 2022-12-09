@@ -10,9 +10,7 @@ const Table = (props: TTable) => {
 				<tr>
 					{headerKeys.map((headerKey, index) => (
 						<th title="Company" key={`header-item-${index}`}>
-							<button onClick={() => headerKey?.onClick}>
-								{headerKey.name}
-							</button>
+							<button onClick={headerKey?.onClick}>{headerKey.name}</button>
 						</th>
 					))}
 				</tr>
