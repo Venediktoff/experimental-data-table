@@ -2,7 +2,7 @@ import React from "react";
 import Input from "./components/Input";
 import Table from "./components/Table";
 import mockData from "./tmp/mock-reporting-dates.json";
-import { SortOrder, TReportItem } from "./types";
+import { SortKeys, SortOrder, TReportItem } from "./types";
 import formatFuzzyTimes from "./utils/formatFuzzyTimes";
 import localizeTime from "./utils/localizeTime";
 import setToLastDayOfMoth from "./utils/setToLastDayOfMoth";
@@ -45,10 +45,16 @@ const App = () => {
 	};
 
 	const handleSort = (key: string) => {
+		if (sortKey === key) {
+			setSortKey(key);
+			setSort(SortOrder.ASC);
+		} else {
+			if (sort === SortOrder.ASC) setSort(SortOrder.DESC);
+			else if (sort === SortOrder.DESC) setSort(SortOrder.NONE);
+			else setSort(SortOrder.ASC);
+		}
+
 		setSortKey(key);
-		if (sort === SortOrder.ASC) setSort(SortOrder.DESC);
-		else if (sort === SortOrder.DESC) setSort(SortOrder.NONE);
-		else setSort(SortOrder.ASC);
 	};
 
 	React.useEffect(() => {
@@ -61,8 +67,6 @@ const App = () => {
 	}, []);
 
 	React.useEffect(() => {
-		setData(sortedData);
-		setSortKey(null);
 		setData(filteredData());
 	}, [search, sortKey, sort]);
 
@@ -76,15 +80,20 @@ const App = () => {
 			<Table
 				data={data || []}
 				headerKeys={[
-					{ name: "Company name", onClick: () => handleSort("companyName") },
+					{
+						name: "Company name",
+						onClick: () => handleSort(SortKeys.companyName),
+					},
 					{
 						name: "Last reporting date",
+						onClick: () => handleSort(SortKeys.lastReportingDate),
 					},
 					{
 						name: "Last reporting period",
 					},
 					{
 						name: "Next reporting date",
+						onClick: () => handleSort(SortKeys.nextReportingDate),
 					},
 				]}
 			/>

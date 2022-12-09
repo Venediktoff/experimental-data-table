@@ -30,3 +30,9 @@ export enum SortOrder {
 	DESC = "DESC",
 	NONE = "NONE",
 }
+
+export enum SortKeys {
+	companyName = "companyName",
+	lastReportingDate = "lastReportingDate",
+	nextReportingDate = "nextReportingDate",
+}
