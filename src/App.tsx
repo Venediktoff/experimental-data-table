@@ -3,6 +3,9 @@ import Input from "./components/Input";
 import Table from "./components/Table";
 import mockData from "./tmp/mock-reporting-dates.json";
 import { TReportItem } from "./types";
+import formatFuzzyTimes from "./utils/formatFuzzyTimes";
+import localizeTime from "./utils/localizeTime";
+import setToLastDayOfMoth from "./utils/setToLastDayOfMoth";
 
 const App = () => {
 	const [data, setData] = React.useState<TReportItem[] | []>(mockData);
@@ -11,8 +14,14 @@ const App = () => {
 	React.useEffect(() => {
 		// Will be replaced with a fetch call to the API
 		// const mockData = async () => await getData("reporting-dates.json");
+		const formattedData = mockData.map((item: TReportItem) => {
+			item.nextReportingDate = formatFuzzyTimes(item.nextReportingDate);
+			// item.nextReportingDate = localizeTime(item.nextReportingDate);
 
-		setData(mockData);
+			return item;
+		});
+
+		setData(formattedData);
 	}, []);
 
 	const filteredData = () => {
